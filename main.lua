@@ -14,10 +14,12 @@ local scoreTimer
 
 display.setStatusBar(display.HiddenStatusBar)
 
+
+
 -- Creating Background
 local bkg = display.newRect(0,0 display.contentWidth,display.contentHeight)
 
-display.setDefault("background"100/255, 180/255,98/255)
+display.setDefault("background",200/255, 180/255,98/255)
 
 -- Setting Position
 bkg.anchorX = 0
@@ -32,7 +34,7 @@ local mole = display.newImage( "Images/mole.png", 0,0)
 mole.x = display.contentCenterX
 mole.y = display.contentCenterY
 
-mole.yScale = 1/3
+mole.yScale = 2/3
 
 mole.isVisible = false
 
@@ -41,7 +43,8 @@ local function UpdateScore
 	scoreText.Text = "score:" .. score
 
  --displays the score
- local scoreText = display.newText("score:" .. score, 0,0, nil, 40)
+ local scoreText = display.newText("score:" .. score, 0,0, nil, 50)
+ scoreText:setFillColor(1,1,0)
 
 
 
@@ -55,7 +58,7 @@ function PopUp()
 mole.x = math.random( 0, display.contentWidth)
 mole.y = math.random( 0, display.contentHeight)
 mole.isVisible = true
-timer.performWithDelay(500,Hide)
+timer.performWithDelay(1000,Hide)
 end
 
 -- This function calls the popup function after 3 seconds
@@ -79,6 +82,7 @@ function Whacked( event )
 -- If touch phase just  started
 if (event.phase == "began") then
 	UpdateScore()
+	audio.play
 end
 end
 

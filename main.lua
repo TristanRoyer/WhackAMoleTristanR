@@ -17,7 +17,7 @@ display.setStatusBar(display.HiddenStatusBar)
 
 
 -- Creating Background
-local bkg = display.newRect(0,0 display.contentWidth,display.contentHeight)
+local bkg = display.newRect(0,0, display.contentWidth,display.contentHeight)
 
 display.setDefault("background",200/255, 180/255,98/255)
 
@@ -34,17 +34,30 @@ local mole = display.newImage( "Images/mole.png", 0,0)
 mole.x = display.contentCenterX
 mole.y = display.contentCenterY
 
-mole.yScale = 2/3
+mole.yScale = 1/5
+
+mole.xScale = 1/4
 
 mole.isVisible = false
 
-local function UpdateScore
-	score = score + 1
-	scoreText.Text = "score:" .. score
+--displays the score
+ local scoreText = display.newText("score:" .. score, 80,80, nil, 50)
+ scoreText:setFillColor(0,0,0)
 
- --displays the score
- local scoreText = display.newText("score:" .. score, 0,0, nil, 50)
- scoreText:setFillColor(1,1,0)
+
+local FreeMusic = audio.loadSound("Sounds/bensound-summer.mp3")
+local FreeMusicChannel
+FreeMusicChannel = audio.play(FreeMusic)
+
+local Whack = audio.loadSound("Sounds/sound effect WHACK.mp3")
+local WhackChannel
+
+local function UpdateScore()
+	score = score + 1
+	scoreText.text = "score:" .. score
+end
+
+
 
 
 
@@ -73,7 +86,7 @@ end
 
 --This function starts the game
 function GameStart()
-PopUpDelay
+PopUpDelay()
 end
 
 --This function increments the score only if the mole is clicked.It then
@@ -82,7 +95,7 @@ function Whacked( event )
 -- If touch phase just  started
 if (event.phase == "began") then
 	UpdateScore()
-	audio.play
+	WhachChannel = audio.play(Whack)
 end
 end
 
